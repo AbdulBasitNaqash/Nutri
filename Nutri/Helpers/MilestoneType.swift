@@ -1,5 +1,5 @@
 //
-//  StreakType.swift
+//  MilestoneType.swift
 //  Nutri
 //
 //  Created by Abdul Basit on 29/04/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum CardType {
+enum MilestoneType {
     case bronze, silver, gold, platinum
     
     var imageName: String {

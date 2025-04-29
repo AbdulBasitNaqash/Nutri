@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StreakMilestonesCard: View {
-    let type: CardType
+    let type: MilestoneType
     let checked: Bool
     
     var body: some View {
@@ -52,6 +52,6 @@ struct StreakMilestonesCard: View {
 }
 
 #Preview {
-    StreakMilestonesCard(type: CardType.platinum, checked: true)
+    StreakMilestonesCard(type: MilestoneType.platinum, checked: true)
 }
 

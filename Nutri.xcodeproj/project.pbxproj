@@ -26,9 +26,11 @@
 		B7E3C1C12DC09A5500512F81 /* CalendarOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3C1C02DC09A5500512F81 /* CalendarOverview.swift */; };
 		B7E3C1C32DC09E7800512F81 /* CalendarDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3C1C22DC09E7800512F81 /* CalendarDataManager.swift */; };
 		B7E3C1C52DC0A5B800512F81 /* StreakMilestonesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3C1C42DC0A5B800512F81 /* StreakMilestonesCard.swift */; };
-		B7E3C1C72DC0A7BF00512F81 /* StreakType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3C1C62DC0A7BF00512F81 /* StreakType.swift */; };
+		B7E3C1C72DC0A7BF00512F81 /* MilestoneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3C1C62DC0A7BF00512F81 /* MilestoneType.swift */; };
 		B7E3C1CC2DC0AFB900512F81 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3C1CB2DC0AFB900512F81 /* CustomColors.swift */; };
 		B7E3C1CE2DC0C2C900512F81 /* SpinningStreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3C1CD2DC0C2C900512F81 /* SpinningStreak.swift */; };
+		B7E3C1DF2DC0F79100512F81 /* NutritionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3C1DE2DC0F79100512F81 /* NutritionViewModel.swift */; };
+		B7E3C1E12DC0F89E00512F81 /* StreakViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E3C1E02DC0F89E00512F81 /* StreakViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,9 +54,11 @@
 		B7E3C1C02DC09A5500512F81 /* CalendarOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarOverview.swift; sourceTree = "<group>"; };
 		B7E3C1C22DC09E7800512F81 /* CalendarDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDataManager.swift; sourceTree = "<group>"; };
 		B7E3C1C42DC0A5B800512F81 /* StreakMilestonesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakMilestonesCard.swift; sourceTree = "<group>"; };
-		B7E3C1C62DC0A7BF00512F81 /* StreakType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakType.swift; sourceTree = "<group>"; };
+		B7E3C1C62DC0A7BF00512F81 /* MilestoneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneType.swift; sourceTree = "<group>"; };
 		B7E3C1CB2DC0AFB900512F81 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		B7E3C1CD2DC0C2C900512F81 /* SpinningStreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningStreak.swift; sourceTree = "<group>"; };
+		B7E3C1DE2DC0F79100512F81 /* NutritionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewModel.swift; sourceTree = "<group>"; };
+		B7E3C1E02DC0F89E00512F81 /* StreakViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,11 +92,11 @@
 			isa = PBXGroup;
 			children = (
 				B7E3C1962DBFA7BB00512F81 /* NutriApp.swift */,
-				B7E3C1A42DBFA85D00512F81 /* ScannerView.swift */,
-				B7E3C1AE2DBFBB6700512F81 /* CameraView.swift */,
-				B7E3C1B42DBFDA5B00512F81 /* ProgressView.swift */,
-				B7E3C1B82DBFE42700512F81 /* NutritionView.swift */,
-				B7E3C1BE2DC0953900512F81 /* StreakView.swift */,
+				B7E3C1CF2DC0F71300512F81 /* Scanner */,
+				B7E3C1D22DC0F72F00512F81 /* Camera */,
+				B7E3C1D52DC0F74500512F81 /* Progress */,
+				B7E3C1D82DC0F75E00512F81 /* Nutrition */,
+				B7E3C1DB2DC0F77300512F81 /* Streak */,
 				B7E3C1CA2DC0AF8400512F81 /* Helpers */,
 				B7E3C1C82DC0AF3800512F81 /* Widgets */,
 				B7E3C1C92DC0AF4800512F81 /* Extensions */,
@@ -139,10 +143,132 @@
 			isa = PBXGroup;
 			children = (
 				B7E3C1C22DC09E7800512F81 /* CalendarDataManager.swift */,
-				B7E3C1C62DC0A7BF00512F81 /* StreakType.swift */,
+				B7E3C1C62DC0A7BF00512F81 /* MilestoneType.swift */,
 				B7E3C1CB2DC0AFB900512F81 /* CustomColors.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B7E3C1CF2DC0F71300512F81 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1D12DC0F72200512F81 /* ViewModel */,
+				B7E3C1D02DC0F71B00512F81 /* View */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		B7E3C1D02DC0F71B00512F81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1A42DBFA85D00512F81 /* ScannerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B7E3C1D12DC0F72200512F81 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B7E3C1D22DC0F72F00512F81 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1D42DC0F73B00512F81 /* ViewModel */,
+				B7E3C1D32DC0F73600512F81 /* View */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		B7E3C1D32DC0F73600512F81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1AE2DBFBB6700512F81 /* CameraView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B7E3C1D42DC0F73B00512F81 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B7E3C1D52DC0F74500512F81 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1D72DC0F75200512F81 /* ViewModel */,
+				B7E3C1D62DC0F74E00512F81 /* View */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		B7E3C1D62DC0F74E00512F81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1B42DBFDA5B00512F81 /* ProgressView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B7E3C1D72DC0F75200512F81 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B7E3C1D82DC0F75E00512F81 /* Nutrition */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1DA2DC0F76B00512F81 /* ViewModel */,
+				B7E3C1D92DC0F76300512F81 /* View */,
+			);
+			path = Nutrition;
+			sourceTree = "<group>";
+		};
+		B7E3C1D92DC0F76300512F81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1B82DBFE42700512F81 /* NutritionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B7E3C1DA2DC0F76B00512F81 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1DE2DC0F79100512F81 /* NutritionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B7E3C1DB2DC0F77300512F81 /* Streak */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1DD2DC0F78100512F81 /* ViewModel */,
+				B7E3C1DC2DC0F77800512F81 /* View */,
+			);
+			path = Streak;
+			sourceTree = "<group>";
+		};
+		B7E3C1DC2DC0F77800512F81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1BE2DC0953900512F81 /* StreakView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B7E3C1DD2DC0F78100512F81 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B7E3C1E02DC0F89E00512F81 /* StreakViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E3C1DF2DC0F79100512F81 /* NutritionViewModel.swift in Sources */,
 				B7E3C1BB2DC080CF00512F81 /* NutritionCard.swift in Sources */,
 				B7E3C1AB2DBFB44E00512F81 /* PlainBorderButton.swift in Sources */,
 				B7E3C1A92DBFB3B900512F81 /* GradientButton.swift in Sources */,
@@ -222,12 +349,13 @@
 				B7E3C1B32DBFD59600512F81 /* CameraHeaderView.swift in Sources */,
 				B7E3C1C32DC09E7800512F81 /* CalendarDataManager.swift in Sources */,
 				B7E3C1A72DBFAE5F00512F81 /* Color+Hex.swift in Sources */,
-				B7E3C1C72DC0A7BF00512F81 /* StreakType.swift in Sources */,
+				B7E3C1C72DC0A7BF00512F81 /* MilestoneType.swift in Sources */,
 				B7E3C1C52DC0A5B800512F81 /* StreakMilestonesCard.swift in Sources */,
 				B7E3C1C12DC09A5500512F81 /* CalendarOverview.swift in Sources */,
 				B7E3C1A52DBFA85D00512F81 /* ScannerView.swift in Sources */,
 				B7E3C1AD2DBFB69A00512F81 /* CameraPermissionPopup.swift in Sources */,
 				B7E3C1972DBFA7BB00512F81 /* NutriApp.swift in Sources */,
+				B7E3C1E12DC0F89E00512F81 /* StreakViewModel.swift in Sources */,
 				B7E3C1B92DBFE42700512F81 /* NutritionView.swift in Sources */,
 				B7E3C1BF2DC0953900512F81 /* StreakView.swift in Sources */,
 				B7E3C1BD2DC0896500512F81 /* WeeklyBarChart.swift in Sources */,

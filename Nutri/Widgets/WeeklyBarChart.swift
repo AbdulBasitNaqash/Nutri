@@ -81,5 +81,5 @@ struct RoundedCorner: Shape {
 
 
 #Preview {
-    WeeklyBarChart(values: [10,80, 30, 40, 60, 70, 90])
+    WeeklyBarChart(values: [10, 80, 30, 40, 60, 70, 90])
 }

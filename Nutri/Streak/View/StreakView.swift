@@ -9,15 +9,14 @@ import SwiftUI
 
 struct StreakView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = StreakViewModel()
     
     var body: some View {
         ScrollView {
-            VStack() {
+            VStack {
                 // Top buttons
                 HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
+                    Button(action: { dismiss() }) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(.mediumGray)
@@ -39,13 +38,15 @@ struct StreakView: View {
                             .foregroundColor(Color.mediumGray)
                             .padding(10)
                     }
-                }.padding(.top)
+                }
+                .padding(.top)
                 
-               SpinningStreak(value: "5")
+                SpinningStreak(value: "\(viewModel.streakCount)")
                 
                 Text("You're on a")
                     .foregroundColor(Color.darkGray)
-                Text("5 days Streak!")
+                
+                Text("\(viewModel.streakCount) days Streak!")
                     .font(.system(size: 24, weight: .bold))
                 
                 Text("Keep it up!")
@@ -53,16 +54,14 @@ struct StreakView: View {
                     .padding(.vertical, 0)
                 
                 ZStack(alignment: .bottom) {
-                    CalendarOverview(dataManager: CalendarDataManager(datesWithData: [
-                        Calendar.current.date(byAdding: .day, value: -5, to: Date())!,
-                        Calendar.current.date(byAdding: .day, value: -4, to: Date())!,
-                        Calendar.current.date(byAdding: .day, value: -3, to: Date())!
-                    ]))
+                    CalendarOverview(
+                        dataManager: CalendarDataManager(datesWithData: viewModel.calendarDatesWithData)
+                    )
                     .padding(.vertical, 17)
                     
                     HStack {
-                        Image("bronze")
-                        Text("10 day streak achiever")
+                        Image(viewModel.badgeImageName)
+                        Text(viewModel.badgeText)
                             .font(.system(size: 14, weight: .medium))
                     }
                     .padding(.horizontal, 12)
@@ -76,7 +75,6 @@ struct StreakView: View {
                         )
                     )
                     .cornerRadius(20)
-                    .background()
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(
@@ -93,21 +91,17 @@ struct StreakView: View {
                 
                 HStack {
                     Text("Milestones")
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                     Spacer()
                     Text("View All  >")
                         .foregroundColor(Color.darkGray)
                 }
                 .frame(maxWidth: .infinity)
                 
-                StreakMilestonesCard(type: .silver, checked: true)
-                    .padding(.vertical, 5)
-                StreakMilestonesCard(type: .bronze, checked: false)
-                    .padding(.vertical, 5)
-                StreakMilestonesCard(type: .gold, checked: false)
-                    .padding(.vertical, 5)
-                StreakMilestonesCard(type: .platinum, checked: false)
-                    .padding(.vertical, 5)
+                ForEach(viewModel.milestones, id: \.type) { milestone in
+                    StreakMilestonesCard(type: milestone.type, checked: milestone.isChecked)
+                        .padding(.vertical, 5)
+                }
                 
                 Spacer()
             }

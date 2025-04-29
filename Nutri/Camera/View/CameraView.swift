@@ -132,7 +132,7 @@ struct CameraView: View {
         .onDisappear {
             session.stopRunning()
         }
-    
+        
     }
     
     private func setupCamera() {

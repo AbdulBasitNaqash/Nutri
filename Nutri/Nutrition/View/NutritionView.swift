@@ -11,18 +11,19 @@ struct NutritionView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var navigationPath: NavigationPath
     
+    @StateObject var viewModel = NutritionViewModel()
+    
     var body: some View {
         NavigationView {
             ZStack {
                 ScrollView {
-                    VStack(alignment: .leading, content: {
+                    VStack(alignment: .leading) {
                         ZStack(alignment: .bottom) {
-                            Image("nutrition_header")
+                            Image(viewModel.headerImageName)
                                 .resizable()
                                 .scaledToFill()
                                 .ignoresSafeArea()
                             
-                            // White transparent gradient overlay at bottom
                             LinearGradient(
                                 gradient: Gradient(colors: [
                                     Color.white.opacity(0.0),
@@ -35,8 +36,8 @@ struct NutritionView: View {
                             .frame(height: 100)
                             .ignoresSafeArea(edges: .bottom)
                             
-                            VStack(alignment: .leading, content: {
-                                Text("FOOD")
+                            VStack(alignment: .leading) {
+                                Text(viewModel.category)
                                     .font(.system(size: 13, weight: .medium))
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 4)
@@ -44,15 +45,14 @@ struct NutritionView: View {
                                         RoundedRectangle(cornerRadius: 20)
                                             .fill(Color.white)
                                     )
-                                Text("Macroni Pizza")
+                                Text(viewModel.foodTitle)
                                     .font(.system(size: 24, weight: .bold))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.bottom, 10)
-                            })
+                            }
                             .padding(.horizontal, 20)
                             
                             ZStack(alignment: .top) {
-                                // Navigation bar
                                 HStack {
                                     Button(action: { dismiss() }) {
                                         Image(systemName: "chevron.left")
@@ -73,88 +73,78 @@ struct NutritionView: View {
                                 .zIndex(1)
                                 
                                 ScrollView {
-                                    VStack(alignment: .leading, content: {})
+                                    VStack {}
                                 }
                             }
                         }
                         .padding(.bottom, 24)
                         
-                        // Nutritional overview section
                         Text("Nutritional Overview:")
                             .font(.system(size: 16, weight: .bold))
                             .padding(.horizontal, 20)
                         
                         NutritionCard(
-                            title: "Calories",
-                            subtitle: "320 kcal",
-                            iconName: "calories"
+                            title: viewModel.calories.title,
+                            subtitle: viewModel.calories.subtitle,
+                            iconName: viewModel.calories.iconName
                         )
                         .padding(.horizontal, 20)
                         .padding(.top, 8)
                         
-                        // Macro Nutrients Section
-                        HStack(alignment: .firstTextBaseline) {
+                        HStack {
                             Text("Macro Nutrients")
                                 .font(.system(size: 16, weight: .bold))
                                 .padding(.top, 20)
-                            
                             Spacer()
-                            
-                            Text("Total: 70g")
+                            Text(viewModel.macroTotal)
                                 .foregroundColor(Color.darkGray)
                         }
                         .padding(.horizontal, 20)
                         
                         HStack(spacing: 16) {
-                            NutritionCard(
-                                title: "Proteins",
-                                subtitle: "20g",
-                                iconName: "proteins"
-                            )
-                            NutritionCard(
-                                title: "Carbs",
-                                subtitle: "40g",
-                                iconName: "carbs"
-                            )
+                            ForEach(viewModel.macroNutrients.prefix(2), id: \.title) { nutrient in
+                                NutritionCard(
+                                    title: nutrient.title,
+                                    subtitle: nutrient.subtitle,
+                                    iconName: nutrient.iconName
+                                )
+                            }
                         }
                         .padding(.horizontal, 20)
-                        NutritionCard(
-                            title: "Fats",
-                            subtitle: "10g",
-                            iconName: "fats"
-                        )
-                        .padding(.horizontal, 20)
-                        .padding(.top, 8)
                         
-                        // Micro Nutrients Section
-                        HStack(alignment: .firstTextBaseline) {
+                        if viewModel.macroNutrients.count > 2 {
+                            NutritionCard(
+                                title: viewModel.macroNutrients[2].title,
+                                subtitle: viewModel.macroNutrients[2].subtitle,
+                                iconName: viewModel.macroNutrients[2].iconName
+                            )
+                            .padding(.horizontal, 20)
+                            .padding(.top, 8)
+                        }
+                        
+                        HStack {
                             Text("Micro Nutrients")
                                 .font(.system(size: 16, weight: .bold))
                                 .padding(.top, 20)
-                            
                             Spacer()
-                            
-                            Text("Total: 25%")
+                            Text(viewModel.microTotal)
                                 .foregroundColor(Color.darkGray)
                         }
                         .padding(.horizontal, 20)
                         
                         HStack(spacing: 16) {
-                            NutritionCard(
-                                title: "Vitamin A",
-                                subtitle: "10%",
-                                iconName: "vitamin_a"
-                            )
-                            NutritionCard(
-                                title: "Calcium",
-                                subtitle: "15%",
-                                iconName: "calcium"
-                            )
+                            ForEach(viewModel.microNutrients, id: \.title) { nutrient in
+                                NutritionCard(
+                                    title: nutrient.title,
+                                    subtitle: nutrient.subtitle,
+                                    iconName: nutrient.iconName
+                                )
+                            }
                         }
                         .padding(.horizontal, 20)
                         .padding(.top, 8)
                         
-                        WeeklyBarChart(values: [10,80, 30, 40, 60, 70, 90])
+                        WeeklyBarChart(values: viewModel.weeklyChartData)
                             .padding(.vertical)
                             .padding(.horizontal, 6)
                             .frame(maxWidth: .infinity)
@@ -162,12 +152,11 @@ struct NutritionView: View {
                                 navigationPath.append("streak")
                             }
                         
-                        GradientButton(
-                            title: "Save to Daily log") {
-                                navigationPath.append("streak")
-                            }
-                            .padding(.horizontal, 20)
-                            .frame(maxWidth: .infinity)
+                        GradientButton(title: "Save to Daily log") {
+                            navigationPath.append("streak")
+                        }
+                        .padding(.horizontal, 20)
+                        .frame(maxWidth: .infinity)
                         
                         HStack(spacing: 4) {
                             Text("Want more insights?")
@@ -186,7 +175,7 @@ struct NutritionView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                    })
+                    }
                 }
                 .padding(.bottom)
                 .ignoresSafeArea()
